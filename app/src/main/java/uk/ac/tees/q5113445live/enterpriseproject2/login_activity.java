@@ -22,6 +22,7 @@ public class login_activity extends AppCompatActivity
 {
     private FirebaseAuth mAuth;
     private static final String TAG = "LoginActivity";
+    public Button but1;
 
     public static final String EXTRA_EMAIL ="uk.ac.tees.q5113445.enterpriseproject2.EMAIL";
     public static final String EXTRA_PASS ="uk.ac.tees.q5113445.enterpriseproject2.PASS";
@@ -41,6 +42,17 @@ public class login_activity extends AppCompatActivity
         {
 
         }
+    }
+
+    public void homePage(){
+        but1 = findViewById(R.id.loginButton);
+        but1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent home = new Intent(login_activity.this, HomeActivity.class);
+                startActivity(home);
+            }
+        });
     }
 
     @Override
@@ -90,10 +102,11 @@ public class login_activity extends AppCompatActivity
                 signIn(email,password);
             }
         }
+
         );
 
-
         mAuth = FirebaseAuth.getInstance();
+
     }
     public void signUp(View view)
     {
@@ -112,9 +125,15 @@ public class login_activity extends AppCompatActivity
                             Log.d(TAG, "signInWithEmail:success");
                             Toast.makeText(login_activity.this, "Login Successful",
                                     Toast.LENGTH_SHORT).show();
+                            System.out.println("Whats Happening ");
+                            homePage();
+                            System.out.println("Nothing ");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                        } else {
+
+                                                        }
+
+                        else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(login_activity.this, "Authentication failed.",
@@ -176,7 +195,6 @@ public class login_activity extends AppCompatActivity
             String uid = user.getUid();
         }
     }
-
 
 }
 

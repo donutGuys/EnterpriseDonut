@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".login_activity" />
         <activity android:name=".sign_up" />
-        <activity android:name=".Main2Activity"></activity>
+        <activity android:name=".Main2Activity" />
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>

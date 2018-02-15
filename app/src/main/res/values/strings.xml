@@ -2,7 +2,7 @@
     <string name="app_name">EnterpriseProject</string>
 
     //Login/Signup pages
-    <string name="login">Login</string>
+    <string name="loginButton">Login</string>
     <string name="sign_up">Sign Up</string>
     <string name="enter_email">Enter Email</string>
     <string name="enter_pass">Enter Password</string>
@@ -20,5 +20,9 @@
     <string name="registration">Enter Vehicle registration</string>
 
     <string name="terms_conditions">By signing up you agree to our Terms and Conditions</string>
+
+    //Home page fields
+    <string name="getName">Return current User name</string>
+    <string name="getName2">Return current User name</string>
 
 </resources>
