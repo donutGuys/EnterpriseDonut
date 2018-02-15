@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file:///home/scm-studs/q5168593/Documents/EnterpriseDonut/EnterpriseDonut.iml" filepath="/home/scm-studs/q5168593/Documents/EnterpriseDonut/EnterpriseDonut.iml" />
       <module fileurl="file://$PROJECT_DIR$/EnterpriseDonut.iml" filepath="$PROJECT_DIR$/EnterpriseDonut.iml" />
+      <module fileurl="file:///home/scm-studs/q5168593/Documents/EnterpriseDonut/app/app.iml" filepath="/home/scm-studs/q5168593/Documents/EnterpriseDonut/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
