@@ -20,6 +20,7 @@
         <activity android:name=".sign_up_user" />
         <activity android:name=".sign_up_driver" />
         <activity android:name=".HomeActivity" />
+        <activity android:name=".CreateDetailsActivity"></activity>
     </application>
 
 </manifest>
