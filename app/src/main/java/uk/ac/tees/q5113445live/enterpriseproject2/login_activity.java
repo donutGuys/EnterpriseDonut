@@ -26,6 +26,8 @@ public class login_activity extends AppCompatActivity
     public static final String EXTRA_EMAIL ="uk.ac.tees.q5113445.enterpriseproject2.EMAIL";
     public static final String EXTRA_PASS ="uk.ac.tees.q5113445.enterpriseproject2.PASS";
 
+    public Button but1;
+
     @Override
     public void onStart()
     {
@@ -34,6 +36,18 @@ public class login_activity extends AppCompatActivity
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
+
+    public void homePage() {
+        but1 = findViewById(R.id.loginButton);
+        but1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent home = new Intent(login_activity.this, HomeActivity.class);
+                startActivity(home);
+            }
+        });
+    }
+
 
     private void updateUI(FirebaseUser currentUser)
     {
@@ -114,6 +128,7 @@ public class login_activity extends AppCompatActivity
                                     Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            homePage();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

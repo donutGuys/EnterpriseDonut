@@ -74,7 +74,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordText"
         app:layout_constraintVertical_bias="0.245"
-        tools:text="@string/login" />
+        tools:text="@string/loginButton" />
 
     <TextView
         android:id="@+id/notMember"
