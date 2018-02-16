@@ -80,7 +80,7 @@
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="132dp"
-        android:text="Request coruier  service"
+        android:text="Request courier  service"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
