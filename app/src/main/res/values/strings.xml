@@ -25,13 +25,12 @@
     <string name="showUserNumber">Get the current users number</string>
     <string name="showUserLocation">Get the current users location</string>
     <string name="showUserEmail">Get the current users email</string>
-
-    <string name="userDetails">User Details</string>
     <string name="settingsButton">Settings page</string>
     <string name="driverButton">Driver page</string>
 
     //User Page
     <string name="requestCourier">User</string>
+    <string name="userDetails">User Details</string>
 
     //Request courier service page
     <string name="deliveryType">delivery type</string>
