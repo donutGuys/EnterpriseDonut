@@ -34,13 +34,17 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     private final OnListFragmentInteractionListener mListener;
     private TextView userBid;
     private DataSnapshot userData;
-    private FirebaseUser fUser;
+
     private DatabaseReference mDatabase;
-    private String w;
+    private DatabaseReference uid;
     private Button updateBid;
-    private String n;
-    private ArrayList x;
+    private String userKey;
+    private FirebaseUser fUser;
+    //private ArrayList advertKey;
+    private String userBidOn;
+    private HashMap<String, String> advertMap;
     private int pos;
+    private ArrayList value;
 
     public MyItemRecyclerViewAdapter(List<Advert> items, OnListFragmentInteractionListener listener)
     {
@@ -51,52 +55,71 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
+
         pos = -1;
         final View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_item, parent, false);
         final View parentView =LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_item_list, parent, false);
 
-        x = new ArrayList();
-        fUser = FirebaseAuth.getInstance().getCurrentUser();
+        //advertKey = new ArrayList();
+        advertMap = new HashMap<>();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("advert").child(fUser.getUid());
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference("advert");
 
         // Attach a listener to read the data at our posts reference
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                {
-                    //Initialises user to stored data and populates TextViews in layout.Advert advert = userData.getValue(Advert.class);
-                    //Creates separate section for bids
-//                    w = dataSnapshot.getKey();
-//                    Advert advert = dataSnapshot.getValue(Advert.class);
+//        mDatabase.addValueEventListener(new ValueEventListener()
+//        {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot)
+//            {
+//                {
+//                    //Initialises user to stored data and populates TextViews in layout.Advert advert = userData.getValue(Advert.class);
+//                    //Creates separate section for bids
+////                    userBidOn = dataSnapshot.getKey();
+////                    Advert advert = dataSnapshot.getValue(Advert.class);
+////
+////                     Getting current user Id
+//                    uid = FirebaseDatabase.getInstance().getReference("advert");
+////                     Filter User
+//                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren())
+//                    {
+//                        if (!userSnapshot.getKey().equals(fUser.getUid()))
+//                        {
+//                            userBidOn = userSnapshot.getKey();
+//                            for (DataSnapshot advertSnapshot: userSnapshot.getChildren())
+//                            {
+//                                advertMap.put( advertSnapshot.getKey().toString(),userBidOn);
+//                                System.out.println("HELLO");
+//                            }
+//                        }
+//                    }
+//                      //userData = dataSnapshot;
+////                    bidText(advert,view);
 //
-//                    userData = dataSnapshot;
-//                    bidText(advert,view);
-
-                    //dataSnapshot.getKey();
-                    for (DataSnapshot q : dataSnapshot.getChildren()) {
-                        Advert advert = dataSnapshot.getValue(Advert.class);
-                        if(!x.contains(q.getKey()))
-                        {
-                            x.add(q.getKey());
-                        }
-
-                        //userData = dataSnapshot;
-                       // bidText(advert,view);
-
-                    }
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-            });
+//                    //dataSnapshot.getKey();
+//                    for (DataSnapshot q : dataSnapshot.getChildren())
+//                    {
+//                        Advert advert = dataSnapshot.getValue(Advert.class);
+//                        if(!advertKey.contains(q.getKey()))
+//                        {
+//                            advertKey.add(q.getKey());
+//                        }
+//                        //userData = dataSnapshot;
+//                       // bidText(advert,view);
+//                    }
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError)
+//            {
+//
+//            }
+//            });
 
 //            updateBid = view.findViewById(R.id.updateBid);
 //            updateBid.setOnClickListener(new View.OnClickListener(){
@@ -172,7 +195,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         }
 
         @Override
-        public String toString() {
+        public String toString()
+        {
             return super.toString() + " '" +n.getText() +c.getText() + "'" + d.getText();
         }
     }
@@ -183,28 +207,40 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         //userBid.setText(advert.getBid());
     }
 
-    public void updateBid(final View view)
+    public void updateBid(final View view, final ArrayList<String> advertKey, DatabaseReference reference, final HashMap<String, String> advertMap)
     {
         //Trying to return name after bid is placed!
-        n = fUser.getUid();
+        userKey = fUser.getUid();
 
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        final DatabaseReference reference = firebaseDatabase.getReference();
-        reference.child("advert").child(fUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //User user = dataSnapshot.getValue(User.class);
-                HashMap<Object, Object> result = new HashMap<>();
-                TextView bidUser = view.findViewById(R.id.enterBid);
-                result.put(n, bidUser.getText().toString());
-                reference.child("advert").child(fUser.getUid()).child(String.valueOf(x.get(pos))).child("bid").setValue(result);
-            }
+        HashMap<Object, Object> result = new HashMap<>();
+        TextView bidUser = view.findViewById(R.id.enterBid);
+        result.put(userKey, bidUser.getText().toString());
+        reference.child(advertMap.get(String.valueOf(advertKey.get(pos)))).
+                    child(String.valueOf(advertKey.get(pos))).child("bid").setValue(result);
+        System.out.println("HELLO");
+//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//        final DatabaseReference reference = firebaseDatabase.getReference();
+//        reference.child("advert").addListenerForSingleValueEvent(new ValueEventListener()
+//        {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot)
+//            {
+//                //User user = dataSnapshot.getValue(User.class);
+//                HashMap<Object, Object> result = new HashMap<>();
+//                TextView bidUser = view.findViewById(R.id.enterBid);
+//                result.put(userKey, bidUser.getText().toString());
+//                reference.child("advert").child(advertMap.get(String.valueOf(advertKey.get(pos)))).child(String.valueOf(advertKey.get(pos))).child("bid").setValue(result);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                //Logger.error(TAG, ">>> Error:" + "find onCancelled:" + databaseError);
+//
+//            }
+//        });
+    }
+    public void findUser()
+    {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //Logger.error(TAG, ">>> Error:" + "find onCancelled:" + databaseError);
-
-            }
-        });
     }
 }
